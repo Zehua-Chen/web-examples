@@ -16,36 +16,36 @@
        * A stateless component
        */
       $.fn.stateless = function ({ value, onUpdate }) {
-        this.prop("prop-value", value);
+        this.prop('prop-value', value);
 
-        if (this.prop("created")) {
-          this.prop("outlet-result").text(`Result is ${value}`);
+        if (this.prop('created')) {
+          this.prop('outlet-result').text(`Result is ${value}`);
           return;
         }
 
-        this.prop("created", true);
+        this.prop('created', true);
         this.empty();
 
-        const result = $("<div />").text(`Result is ${value}`);
+        const result = $('<div />').text(`Result is ${value}`);
 
-        this.prop("outlet-result", result);
+        this.prop('outlet-result', result);
 
         const view = this;
 
         return this.append(
           result,
-          $("<button />")
-            .text("+")
+          $('<button />')
+            .text('+')
             // event handlers are only registered once, but the prop value
             // will change in the future. So we have to use prop() to get the
             // latest prop
-            .on("click", function () {
-              onUpdate(view.prop("prop-value") + 1);
+            .on('click', function () {
+              onUpdate(view.prop('prop-value') + 1);
             }),
-          $("<button />")
-            .text("-")
-            .on("click", function () {
-              onUpdate(view.prop("prop-value") - 1);
+          $('<button />')
+            .text('-')
+            .on('click', function () {
+              onUpdate(view.prop('prop-value') - 1);
             })
         );
       };
@@ -66,8 +66,8 @@
       };
 
       $(() => {
-        $("#view-controller-0").stateful({ value: 0 });
-        $("#view-controller-1").stateful({ value: 10 });
+        $('#view-controller-0').stateful({ value: 0 });
+        $('#view-controller-1').stateful({ value: 10 });
       });
     </script>
     <!--each of these view controlelrs manages their won separate states-->

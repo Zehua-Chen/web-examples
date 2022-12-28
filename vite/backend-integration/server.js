@@ -1,21 +1,21 @@
-import { createServer, get } from "http";
-import { readFileSync } from "fs";
+import { createServer, get } from 'http';
+import { readFileSync } from 'fs';
 
-const template = readFileSync("index.html").toString();
+const template = readFileSync('index.html').toString();
 
 const server = createServer((request, response) => {
   console.log(`new request: ${request.url}`);
 
   switch (request.url) {
-    case "/":
+    case '/':
       response.write(template);
       response.end();
       break;
   }
 
-  if (request.url.startsWith("/static")) {
+  if (request.url.startsWith('/static')) {
     get(`http://localhost:3000${request.url}`, (viteResponse) => {
-      viteResponse.on("data", (chunk) => {
+      viteResponse.on('data', (chunk) => {
         response.write(chunk);
         response.end();
       });
@@ -24,5 +24,5 @@ const server = createServer((request, response) => {
 });
 
 server.listen(4000, () => {
-  console.log("server running on http://localhost:4000");
+  console.log('server running on http://localhost:4000');
 });
